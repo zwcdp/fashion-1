@@ -1,6 +1,6 @@
 """Read+Convert data
 
-The data is embedded in a csv file with each row containing a label 
+The data is embedded in a csv file with each row containing a label
 (first column) and the one pixel per column.
 
 Convert each row to a (28x28) image
@@ -22,16 +22,14 @@ LW = 28 # length/width
 N = 10000 # datasize
 
 def convert_line(line: str, plot=False):
-    """
-    A line from the data file is converted to an image
-    """
+    """A line from the data file is converted to an image"""
 
     # Create final image
-    im = np.zeros((LW,LW))
+    im = np.zeros((LW, LW))
     c = 1 # counter
 
     # Remove new line and split on ","
-    line = line.replace("\n","").split(",") 
+    line = line.replace("\n", "").split(",")
     label = int(line[0])
 
     # TODO speed up
@@ -39,7 +37,7 @@ def convert_line(line: str, plot=False):
     for y in range(np.shape(im)[0]):
         for x in range(np.shape(im)[1]):
             im[y][x] = int(line[c])
-            c+=1
+            c += 1
     if plot: plot_image(im)
     return label, im
 
@@ -66,23 +64,27 @@ def convert_data():
     return X, y
 
 
-def do_pca(X,y, components: int=2, plot: bool=True):
+def do_pca(X, y, components: int = 2, plot: bool = True):
     """Run and plot PCA"""
 
     # PCA Stuff?
     pca = PCA(n_components=components)
     pca.fit(X)
 
-    # Transform input data based onb eigenvectors
+    # Transform input data based on eigenvectors
     X = pca.transform(X)
+
+    # Get scatters
     x = [i[0] for i in X]
-    y = [i[1] for i in X]
+    w = [i[1] for i in X]
 
     # plot
     if plot:
-        plt.scatter(x,y, c=y)
+        plt.scatter(x, w, c=y)
         plt.show()
+
 
 if __name__ == "__main__":
     X, y = convert_data()
     do_pca(X, y)
+    
