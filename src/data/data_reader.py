@@ -91,5 +91,6 @@ def quickplot_image(data, img_index=None) -> None:
 
 
 if __name__ == "__main__":
+    # If called as a script, read images and plt one
     data = read_images()
     quickplot_image(data)
