@@ -47,6 +47,31 @@ def read_images(file_label="test_data", num_img=10):
 
     return data
 
+def read_labels(file_label="test_label", num_lab=10):
+    """
+    Read the 'num_lab' first labels form the label file with filename 
+    FILESNAME[file_label] and return these a numpy array.
+
+    Parameters:
+        * file_label (str): label pointing to FILENAMES dictionary value
+        * num_lab (int): amount of labels to read
+
+    Returns:
+        * labels (np.array): array containing the labels
+    """
+    f = gzip.open(os.path.join(RAW_DATA_FOLDER, FILENAMES[file_label]))
+    labels = np.array([])
+    for _ in range(0,num_lab):
+        f.read(8)
+        buf = f.read(1)
+        # Add new label to list
+        labels = np.concatenate([
+            labels, 
+            np.frombuffer(buf, dtype=np.uint8).astype(np.int64)
+            ])
+
+    return labels
+
 
 def quickplot_image(data, img_index=None) -> None:
     """
@@ -66,7 +91,5 @@ def quickplot_image(data, img_index=None) -> None:
 
 
 if __name__ == "__main__":
-    print("data reader")
     data = read_images()
     quickplot_image(data)
-
