@@ -3,13 +3,13 @@
 # Download data and place in ../../data/raw folder
 
 # Check if folder exists, if not create
-mkdir --parents ../../data/raw/
+mkdir --parents ./data/raw/
 
 # Loactions + filenames of data and labels
-TRAINDATA="../../data/raw/train-images-idx3-ubyte.gz"
-TRAINLABEL="../../data/raw/train-labels-idx1-ubyte.gz"
-TESTDATA="../../data/raw/t10k-images-idx3-ubyte.gz"
-TESTLABEL="../../data/raw/t10k-labels-idx1-ubyte.gz"
+TRAINDATA="./data/raw/train-images-idx3-ubyte.gz"
+TRAINLABEL="./data/raw/train-labels-idx1-ubyte.gz"
+TESTDATA="./data/raw/t10k-images-idx3-ubyte.gz"
+TESTLABEL="./data/raw/t10k-labels-idx1-ubyte.gz"
 
 # Download data
 
