@@ -8,19 +8,23 @@ Global variables:
         identifiers to actual filenames
 """
 
+
 __author__ = "Tim de Klijn"
+
 
 import os
 import gzip
 import numpy as np
 import matplotlib.pyplot as plt
 
-RAW_DATA_FOLDER = os.path.join("..", "..", "data", "raw")
+
+RAW_DATA_FOLDER = os.path.join("data", "raw")
 IMG_SIZE = 28
 FILENAMES = {"train_data": "train-images-idx3-ubyte.gz",
              "train_label": "train-images-idx3-ubyte.gz",
              "test_data": "train-images-idx3-ubyte.gz",
              "test_label": "t10k-labels-idx1-ubyte.gz"}
+
 
 def read_images(file_label="test_data", num_img=10):
     """
@@ -36,7 +40,6 @@ def read_images(file_label="test_data", num_img=10):
     """
     f = gzip.open(os.path.join(RAW_DATA_FOLDER, FILENAMES[file_label]))
     f.read(16)
-    print(f)
     buf = f.read(IMG_SIZE * IMG_SIZE * num_img)
     data = np.frombuffer(buf, dtype=np.uint8).astype(np.float32)
     data = data.reshape(num_img, IMG_SIZE, IMG_SIZE, 1)
@@ -44,17 +47,23 @@ def read_images(file_label="test_data", num_img=10):
 
     return data
 
-def quickplot_image(data, img_index=0) -> None:
+
+def quickplot_image(data, img_index=None) -> None:
     """
     Quickly plot an image from the dataset.
 
     Parameters:
         * data (np.array): array containing images as array
-        * img_index (int): which images from the array to plot
+        * img_index (int): which images from the array to plot if
+            img_index is None a radom image from the first 10 will
+            be plotted
     """
+    if img_index == None:
+        img_index = np.random.choice(range(0,10))
     img = np.asarray(data[img_index]).squeeze()
     plt.imshow(img)
     plt.show()
+
 
 if __name__ == "__main__":
     print("data reader")
