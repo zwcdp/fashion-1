@@ -10,5 +10,9 @@ help:
 download-data: src/data/get_data.sh
 	bash src/data/get_data.sh
 
+# Call data reader script and show single image in dataset
 show-single: src/data/data_reader.py
 	python src/data/data_reader.py
+
+pca: src/analysis/pca.py
+	python src/analysis/pca.py
