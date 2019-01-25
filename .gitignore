@@ -2,3 +2,4 @@ results/
 venv/
 .vscode
 *.gz
+**__pycache__**

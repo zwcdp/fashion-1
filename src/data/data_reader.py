@@ -26,7 +26,7 @@ FILENAMES = {"train_data": "train-images-idx3-ubyte.gz",
              "test_label": "t10k-labels-idx1-ubyte.gz"}
 
 
-def read_images(file_label="test_data", num_img=10):
+def read_images(file_label="train_data", num_img=10):
     """
     Read images from idx3-ubyte.gz files and return the images in
     numpy array format.
@@ -47,7 +47,7 @@ def read_images(file_label="test_data", num_img=10):
 
     return data
 
-def read_labels(file_label="test_label", num_lab=10):
+def read_labels(file_label="train_label", num_lab=10):
     """
     Read the 'num_lab' first labels form the label file with filename 
     FILESNAME[file_label] and return these a numpy array.

@@ -3,12 +3,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.decomposition import PCA
 
-sys.path.append("..")
-
-from data.data_reader import read_images
-
 def do_pca(X, y, components: int = 2, plot: bool = True):
     """Run and plot PCA"""
+
+    new_X = []
+    for i in X:
+        new_X.append(i.flatten())
+
+    X = new_X
 
     # PCA Stuff?
     pca = PCA(n_components=components)
@@ -22,9 +24,6 @@ def do_pca(X, y, components: int = 2, plot: bool = True):
     w = [i[1] for i in X]
 
     # plot
-    if plot:
-        plt.scatter(x, w, c=y)
-        plt.show()
 
-if __name__ == "__main__":
-    X = read_images()
+    plt.scatter(x, w, c=y)
+    plt.show()
